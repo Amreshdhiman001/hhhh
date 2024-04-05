@@ -1,0 +1,29 @@
+*body{
+    margin: 0;
+    padding: 0;
+
+}
+
+marquee{
+    text-decoration: wavy;
+    color: brown;
+    text-overflow:clip;
+   
+
+}
+#navbarSupportedContent{
+    text-align: center;
+}
+
+#customer:hover{
+   
+   /* background-color: rgb(127, 175, 139); */
+   /* border-radius: 50%; */
+   border: 5px solid pink;
+    align-items: center;
+}
+
+.svg{
+    background-image: url(img/1.jpg);
+    overflow: hidden;
+}

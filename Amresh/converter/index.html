@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PDF to JPG Converter</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+  }
+  #fileInput {
+    margin: 20px;
+  }
+  #convertButton {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+  }
+  #resultContainer {
+    margin: 20px;
+  }
+  #imagePreview {
+    max-width: 100%;
+    height: auto;
+  }
+</style>
+</head>
+<body>
+  <input type="file" id="fileInput">
+  <button id="convertButton">Convert</button>
+  <div id="resultContainer"></div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.12.313/pdf.min.js"></script>
+  <script>
+    document.getElementById('convertButton').addEventListener('click', function() {
+      var fileInput = document.getElementById('fileInput');
+      var file = fileInput.files[0];
+
+      if (file) {
+        var reader = new FileReader();
+        reader.onload = function() {
+          var typedarray = new Uint8Array(this.result);
+          convertToImage(typedarray);
+        };
+        reader.readAsArrayBuffer(file);
+      } else {
+        alert('Please select a PDF file.');
+      }
+    });
+
+    function convertToImage(pdfData) {
+      pdfjsLib.getDocument({data: pdfData}).promise.then(function(pdf) {
+        pdf.getPage(1).then(function(page) {
+          var scale = 1.5;
+          var viewport = page.getViewport({ scale: scale });
+          var canvas = document.createElement('canvas');
+          var context = canvas.getContext('2d');
+          canvas.height = viewport.height;
+          canvas.width = viewport.width;
+          var renderContext = {
+            canvasContext: context,
+            viewport: viewport
+          };
+          page.render(renderContext).promise.then(function() {
+            var image = new Image();
+            image.src = canvas.toDataURL('image/jpeg');
+            var resultContainer = document.getElementById('resultContainer');
+            resultContainer.innerHTML = '';
+            resultContainer.appendChild(image);
+          });
+        });
+      });
+    }
+  </script>
+</body>
+</html>
