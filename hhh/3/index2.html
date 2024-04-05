@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- font awesome cdn link  -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+
+    <!-- custom  link  -->
+    <link rel="stylesheet" href="style2.css">
+</head>
+<body>
+    <div class="container">
+        <div class="card">
+            <img src="img/Capture.PNG" alt="">
+            <h3>someone's name</h3>
+            <span class="post">designer / developer</span>
+           <div class="icons">
+              <a href="#" class="fab fa-facebook-f"></a>
+              <a href="#" class="fab fa-twitter"></a>
+              <a href="#" class="fab fa-instagram"></a>
+              <a href="#" class="fab fa-youtube"></a>
+           </div>
+        
+        <a href="#"><button>follow</button></a>
+        <a href="#"><button>massage</button></a>
+        <div class="shares">
+            <a href="#" class="counter"> <span class="count">1230</span></a><i class="fas fa-heart"></i>
+            <a href="#" class="counter"> <span class="count">1600</span></a><i class="fas fa-share"></i>
+            <a href="#" class="counter"> <span class="count">900</span></a><i class="fas fa-comment"></i>
+
+        </div>
+    </div>
+
+
+    </div>
+
+    <!--jquery cdn-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    
+    <script>
+        $(document).ready(function(){
+
+        $('.counter').each(function(){
+            $(this).prop('Counter', 0).animate({
+                Counter : $(this).text()
+
+            },{
+                
+               duration : 3500,
+               easing : 'swing',
+               step : function(now){
+                   $(this).text(Math.ceil(now) + '+');
+   
+               }
+               
+            })
+        });
+    });
+    </script>
+</body>
+</html>
